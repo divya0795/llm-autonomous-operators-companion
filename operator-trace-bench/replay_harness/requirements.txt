@@ -1,0 +1,19 @@
+# Requirements for the operator-trace-bench replay harness.
+#
+# DEFAULT PILOT IS STDLIB-ONLY. `python cpu_pilot.py` and
+# `python ../validate_trace.py` require nothing beyond the Python 3.8+
+# standard library. You do NOT need to install anything to reproduce the
+# contract demonstration in this companion.
+#
+# The pins below are OPTIONAL and document the heavier scale-up path only:
+# if you wish to replace the toy rule-based agent in cpu_pilot.py with a real
+# LLM-driven operator agent that emits the same trace schema, these are the
+# versions the harness was exercised against. They are NOT imported by the
+# default pilot.
+#
+# Install the optional path with:  pip install -r requirements.txt
+#
+# --- optional scale-up dependencies (NOT needed for the default pilot) ---
+# torch==2.3.1
+# transformers==4.41.2
+# accelerate==0.30.1

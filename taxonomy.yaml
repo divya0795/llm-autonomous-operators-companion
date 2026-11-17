@@ -1,0 +1,90 @@
+# Taxonomy of the operator-LLM survey.
+#
+# Seven descriptive axes used to classify every work in evidence_matrix.csv.
+# Each axis lists its allowed category codes with a one-line definition.
+# The autonomy_level axis is the formal lattice O < R < A < F of the paper's
+# Definition (Autonomy assignment); validate_trace.py enforces its invariants.
+
+ops_task:
+  description: What operations task the agent performs on a live distributed system.
+  categories:
+    RCA: "Root-cause analysis — localise the origin of a degradation from telemetry."
+    IR: "Incident response / triage — route, classify, and propose mitigations for active incidents."
+    AS: "Capacity and autoscaling — size resource pools against load."
+    CFG: "Configuration, network, and database operation — generate, validate, apply config changes."
+    REM: "Remediation and self-healing — close the loop from diagnosis to repair."
+    AD: "Anomaly, log, and trace detection — supply the upstream detection signal."
+    BENCH: "Benchmark / evaluation harness — measures operator agents rather than acting."
+    FND: "Foundation — agent reasoning, tool use, or a safety primitive reused by operator agents."
+
+architecture:
+  description: How the operator-LLM is built.
+  categories:
+    single-ReAct: "Single agent interleaving reasoning steps with tool calls (ReAct/CoT loop)."
+    multi-agent: "Role-specialised or orchestrated cooperating agents."
+    graph-aug: "Agent augmented with a causal / dependency / topology graph."
+    tool-aug: "Tool- or API-calling agent with an external action surface."
+    full-lifecycle: "Closed detect -> diagnose -> remediate loop."
+    RAG: "Retrieval-augmented; grounded in retrieved runbooks / docs / history."
+    SOP-guided: "Agent threaded through a human-authored standard-operating-procedure graph."
+    classical-ML: "Pre-LLM statistical / deep-learning baseline (no LLM in the loop)."
+
+autonomy_level:
+  description: >
+    Highest level at which the agent is authorised to engage an action class,
+    on the totally ordered lattice O < R < A < F. Per-class, not a system scalar.
+  categories:
+    O: "Observe — read access only; emits a state estimate, never an action that changes state."
+    R: "Recommend — every state-changing effect is gated by an external actor; the agent never actuates."
+    A: "Act-with-approval — each actuation is approved before commit and is reversible (bounded-time rollback)."
+    F: "Fully-autonomous — actuation without human approval, but bounded blast radius, attested grounding, automatic rollback."
+    none: "Not an acting system (benchmark, dataset, foundation, or detector)."
+
+grounding:
+  description: Evidence channels the agent reasons over.
+  categories:
+    logs: "Application / system log lines."
+    metrics: "Time-series KPIs and resource metrics."
+    traces: "Distributed request traces / spans."
+    topology: "Service dependency or call graph."
+    runbooks: "Troubleshooting guides / SOPs / TSGs."
+    RAG: "Retrieved documents or historical incidents."
+    code: "Source, configuration, or IaC artefacts."
+    api: "Live platform API state (e.g. Kubernetes API)."
+    none: "No external grounding (e.g. pure QA benchmark)."
+
+safety_mechanism:
+  description: Guardrails an operator-LLM reports, each tied to the invariant it discharges.
+  categories:
+    blast_radius_limit: "Caps the components an action may touch (read-write separation); pre(F) bound."
+    dry_run: "Executes an action against a sandbox/simulation before commit; inv(A) pre-check."
+    canary: "Progressive / fractional rollout exposing a change to a traffic slice first."
+    rollback: "Trigger that restores pre-action state; reversibility clause of inv(A)/inv(F)."
+    hitl: "Human-in-the-loop approval / escalation threshold; pre(A) gate."
+    consensus: "Multi-agent voting reconciling outputs to suppress idiosyncratic errors."
+    confidence_gating: "Withholds actuation below a calibrated confidence threshold."
+    privilege_separation: "OS / RBAC scoping bounding what the agent can reach."
+    attestation: "Adversarial-telemetry defence attesting the grounding channel; mandatory at F."
+    none_reported: "No safety mechanism reported (advisory only or out of scope)."
+
+failure_mode:
+  description: How operator agents fail; branches I inference-time, L learning-time, D distributed-systems.
+  categories:
+    hallucinated_diagnosis: "I — ungrounded generation produces a wrong root cause."
+    incomplete_exploration: "I — premature loop termination before evidence is sufficient."
+    adversarial_telemetry: "I — poisoned / spoofed signals over an unattested grounding channel."
+    cascading_remediation: "I — unbounded actuation triggers a wider outage."
+    permission_scope_violation: "I — over-broad autonomy assignment acts beyond its authorised class."
+    tool_call_confusion: "I — ambiguous tool interface causes a mis-issued action."
+    reward_hacking: "L — optimisation against a proxy diverges from the true objective."
+    replay_to_live_shift: "L — distribution divergence between recorded traces and live operation."
+    cross_region_cascade: "D — single-region view of global state triggers a cross-region cascade."
+
+evaluation_mode:
+  description: How a work is evaluated.
+  categories:
+    production: "Deployed in a live production environment."
+    case_study: "Qualitative / quantitative study on selected real incidents."
+    public_benchmark: "Scored on a shared public benchmark."
+    injected_fault: "Run against a fault-injection / live testbed."
+    offline_dataset: "Evaluated on a static offline dataset of incidents/records."

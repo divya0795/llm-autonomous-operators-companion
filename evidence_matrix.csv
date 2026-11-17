@@ -1,0 +1,51 @@
+bibkey,work,ops_task,architecture,autonomy_level,grounding,safety_mechanisms,evaluation,year
+rcagent23,RCAgent,RCA,tool-aug single-ReAct,R,logs+metrics+traces,blast_radius_limit+dry_run,case_study,2023
+rcacopilot23,RCACopilot,RCA+IR,multi-agent,R,logs+metrics+RAG,hitl+privilege_separation,production,2023
+ahmedrca23,Ahmed et al.,IR+RCA,single-ReAct,R,incident-text,none_reported,offline_dataset,2023
+xpert24,Xpert,IR,RAG,R,traces+metrics+RAG,confidence_gating+hitl,production,2024
+raagents24,RCA-agents,RCA,single-ReAct+multi-agent,R,logs+traces+RAG,hitl,production,2024
+flowofaction25,Flow-of-Action,RCA,SOP-guided,R,runbooks+RAG,none_reported,case_study,2025
+gala25,GALA,RCA,graph-aug,R,traces+topology+metrics,none_reported,public_benchmark,2025
+aoi26,AOI,RCA+REM,multi-agent,A,logs+metrics+traces,blast_radius_limit+rollback,offline_dataset,2026
+oracl26,ORACL,AS,single-ReAct,A,metrics,blast_radius_limit,injected_fault,2026
+lads25,LADs,CFG+REM,multi-agent,A,code+logs,dry_run+rollback,case_study,2025
+sre26,SRE-agent,REM,full-lifecycle,F,metrics+logs,rollback+canary,production,2026
+rcafail26,RCA-fail study,RCA,classical-ML,none,logs+metrics+traces,none_reported,offline_dataset,2026
+incident25,Incident multi-agent,IR,multi-agent,R,logs+RAG,consensus,case_study,2025
+aioops25,AI-Oops attack,IR,classical-ML,none,traces,attestation,case_study,2025
+air26,AIR,FND,multi-agent,A,api,privilege_separation+hitl,case_study,2026
+safeharness26,SafeHarness,FND,multi-agent,A,api,privilege_separation+rollback,case_study,2026
+aiopslab25,AIOpsLab,BENCH,full-lifecycle,A,logs+metrics+traces,dry_run+privilege_separation,injected_fault,2025
+itbench25,ITBench,BENCH,multi-agent,A,metrics+api,dry_run+privilege_separation,injected_fault,2025
+sregym26,SREGym,BENCH,full-lifecycle,F,metrics+logs+traces,canary+rollback,injected_fault,2026
+openrca25,OpenRCA,BENCH,single-ReAct,R,logs+metrics+traces,dry_run,offline_dataset,2025
+rcaeval24,RCAEval,BENCH,classical-ML,none,metrics+traces+logs,none_reported,offline_dataset,2024
+opseval23,OpsEval,BENCH,classical-ML,none,none,none_reported,offline_dataset,2023
+nissist24,Nissist,IR+REM,multi-agent,A,runbooks+RAG,hitl,case_study,2024
+pacelm23,PACE-LM,RCA,RAG,R,RAG,confidence_gating,production,2023
+incontextrca24,In-context RCA,RCA,single-ReAct,R,incident-text,hitl,production,2024
+mabc24,mABC,RCA,multi-agent,R,traces+metrics,consensus,public_benchmark,2024
+tamo25,TAMO,RCA,tool-aug single-ReAct,R,metrics+logs+traces,dry_run,injected_fault,2025
+dbgpt23,D-Bot,CFG+RCA,tool-aug+RAG,R,metrics+RAG,hitl,case_study,2023
+kubeintellect25,KubeIntellect,REM+CFG,multi-agent,A,api+logs+metrics,privilege_separation,case_study,2025
+llmtriage24,LLM-incident-triage,IR,single-ReAct,R,incident-text,hitl,production,2024
+autoremediation24,Auto-remediation,REM,single-ReAct,A,metrics+traces,blast_radius_limit,injected_fault,2024
+configvalidation24,Config-validation (Ciri),CFG,RAG,R,code+RAG,dry_run,offline_dataset,2024
+netconfeval24,NetConfEval,CFG,RAG,R,code,dry_run,offline_dataset,2024
+ansibleyaml23,Ansible-YAML gen,CFG+REM,single-ReAct,A,code,dry_run,offline_dataset,2023
+react22,ReAct,FND,single-ReAct,none,api,none_reported,public_benchmark,2022
+reflexion23,Reflexion,FND,single-ReAct,none,api,none_reported,public_benchmark,2023
+toolemu23,ToolEmu,FND,tool-aug,none,api,dry_run,public_benchmark,2023
+agentdojo24,AgentDojo,FND,tool-aug,none,api,attestation,public_benchmark,2024
+injecagent24,InjecAgent,FND,tool-aug,none,api,attestation,public_benchmark,2024
+indirectinjection23,Indirect prompt injection,FND,tool-aug,none,api,attestation,case_study,2023
+agentsafetysurvey25,TrustAgent,FND,multi-agent,A,api,privilege_separation+hitl,case_study,2024
+agentbench23,AgentBench,BENCH,single-ReAct,none,api,none_reported,public_benchmark,2023
+swebench23,SWE-bench,BENCH,single-ReAct,A,code,dry_run,public_benchmark,2023
+taubench24,tau-bench,BENCH,tool-aug,A,api,hitl,public_benchmark,2024
+deeplog17,DeepLog,AD,classical-ML,O,logs,none_reported,offline_dataset,2017
+microrca20,MicroRCA,RCA,classical-ML,O,metrics+topology,none_reported,injected_fault,2020
+traceanomaly20,TraceAnomaly,AD,classical-ML,O,traces,none_reported,offline_dataset,2020
+cloudranger18,CloudRanger,RCA,classical-ML,O,metrics+topology,none_reported,production,2018
+gandalf20,Gandalf,REM,classical-ML,A,metrics,canary+rollback,production,2020
+aiopssurvey25,AIOps survey (LLM),FND,classical-ML,none,none,none_reported,offline_dataset,2025

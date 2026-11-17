@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this companion archive, please cite the manuscript referenced under preferred-citation."
+title: "Companion archive for: A Design Framework for Sound LLM Operators of Distributed Systems: Autonomy Levels, Governing Laws, and a Reference Architecture"
+type: dataset
+license: CC-BY-4.0
+repository-code: "https://github.com/divya0795/llm-autonomous-operators-companion"
+url: "https://github.com/divya0795/llm-autonomous-operators-companion"
+authors:
+  - family-names: Chukkapalli
+    given-names: Divya
+    orcid: "https://orcid.org/0009-0005-4691-3395"
+    affiliation: "Microsoft Corporation, Apex NC, USA"
+    email: divya.95j@gmail.com
+preferred-citation:
+  type: article
+  title: "A Design Framework for Sound LLM Operators of Distributed Systems: Autonomy Levels, Governing Laws, and a Reference Architecture"
+  authors:
+    - family-names: Chukkapalli
+      given-names: Divya
+      orcid: "https://orcid.org/0009-0005-4691-3395"
+  year: 2026
+  journal: "arXiv preprint"
+  url: "https://arxiv.org/abs/XXXX.XXXXX"

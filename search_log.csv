@@ -1,0 +1,16 @@
+query_id,database,query_string,date_run,hits,after_dedup,after_screen,included
+Q01,arXiv,"(LLM OR \"large language model\" OR agent OR agentic) AND (AIOps OR \"root cause\" OR incident)",2026-05-04,57,46,28,23
+Q02,arXiv,"(LLM OR agent) AND (autoscaling OR remediation OR self-healing OR runbook)",2026-05-04,31,24,14,11
+Q03,arXiv,"(LLM OR agent) AND (guardrail OR \"prompt injection\" OR \"blast radius\" OR rollback OR sandbox)",2026-05-05,27,20,11,9
+Q04,ACM DL,"LLM agent operations (AIOps OR incident OR observability OR remediation)",2026-05-06,29,22,13,11
+Q05,ACM DL,"agent safety (guardrail OR \"telemetry manipulation\" OR sandbox) distributed systems",2026-05-06,14,11,6,5
+Q06,IEEE Xplore,"large language model (AIOps OR \"root cause\" OR self-healing OR configuration)",2026-05-07,24,18,10,8
+Q07,IEEE Xplore,"agent (incident response OR observability OR \"network configuration\")",2026-05-07,13,10,5,4
+Q08,USENIX,"LLM OR agent (operations OR SRE OR reliability OR incident)",2026-05-08,11,9,6,5
+Q09,USENIX,"deployment gating OR canary OR rollback OR chaos engineering",2026-05-08,8,7,4,3
+Q10,DBLP,"venue:OSDI|NSDI|SOSP|ATC LLM agent operations remediation",2026-05-11,12,9,5,4
+Q11,DBLP,"AIOps benchmark OR \"root cause\" benchmark agent",2026-05-11,9,7,5,4
+Q12,Semantic Scholar,"operator LLM autonomy safety distributed systems survey",2026-05-12,10,8,4,3
+Q13,Semantic Scholar,"LLM AIOps grounding telemetry retrieval-augmented operations",2026-05-12,9,7,4,3
+S14,"Snowballing (backward, 1-hop)","references of 16 verified operator-LLM and operator-safety seeds",2026-05-18,9,7,4,2
+S15,"Snowballing (forward, 1-hop)","works citing the 16 verified seeds (saturation after first hop)",2026-05-18,7,5,1,1

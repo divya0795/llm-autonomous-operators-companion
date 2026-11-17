@@ -1,0 +1,91 @@
+# Operator-trace record schema (human-readable mirror).
+#
+# This YAML is the documentation copy of the schema. The authoritative,
+# executable copy is the SCHEMA dict embedded in ../../validate_trace.py, so
+# the validator has NO YAML dependency. Keep the two in sync by hand.
+#
+# A trace is an ordered, newline-delimited JSON (JSONL) file. Each line is one
+# trace record: a single event in an operator agent's run over an incident.
+# Records share a (run_id) and are ordered by (seq) and (timestamp).
+#
+# There are four event_type values:
+#   observation    - the agent reads telemetry / system state (no state change).
+#   reasoning_step - an internal deliberation / hypothesis step.
+#   tool_call      - the agent invokes a read-only or proposal tool.
+#   actuation      - the agent effects (or proposes to effect) a state change.
+#
+# Actuations carry the extra fields that the autonomy-invariant contract checks:
+# an action class, the affected component and its blast-radius class, the
+# autonomy level under which the action was taken, and (depending on that level)
+# a proposal_only flag, an approval_token, and a rollback_handle.
+
+record:
+  required:
+    run_id:
+      type: string
+      semantics: "Identifier shared by every record of one operator run."
+    seq:
+      type: integer
+      semantics: "Monotonically increasing 0-based index ordering records within a run."
+    timestamp:
+      type: string
+      semantics: "ISO-8601 timestamp of the event (e.g. 2026-05-20T14:03:11Z)."
+    event_type:
+      type: string
+      enum: [observation, reasoning_step, tool_call, actuation]
+      semantics: "Which of the four kinds of trace event this record is."
+    method:
+      type: string
+      semantics: "Name of the method / system that produced the trace (e.g. ReAct-RCA, SOP-multiagent)."
+
+  optional:
+    agent:
+      type: string
+      semantics: "Identifier of the specific agent/role within a multi-agent system."
+    content:
+      type: string
+      semantics: "Free-text payload: observation summary, reasoning text, or tool name+args."
+    latency_ms:
+      type: number
+      semantics: "Wall-clock latency of this step in milliseconds. May be present-but-null."
+    tokens:
+      type: integer
+      semantics: "Token count consumed by this step. May be present-but-null."
+
+  # The following fields are REQUIRED when event_type == actuation, and ignored
+  # (should be absent) otherwise.
+  actuation_fields:
+    action_class:
+      type: string
+      semantics: "Operations action class actuated, e.g. restart_pod, scale_replicas, rollback_deploy, propose_only."
+    component:
+      type: string
+      semantics: "The concrete component the action affects, e.g. service:checkout, node:worker-7."
+    blast_radius_class:
+      type: string
+      enum: [pod, service, node, cluster, region, cross_region]
+      semantics: "Declared maximum scope the action may touch (ordered narrow -> wide)."
+    autonomy_level:
+      type: string
+      enum: [O, R, A, F]
+      semantics: "Lattice level under which this actuation was taken (Observe<Recommend<Act-with-approval<Fully-autonomous)."
+    proposal_only:
+      type: boolean
+      semantics: "True if the actuation only proposes a change (no state effect). Required true at level R."
+    approval_token:
+      type: string
+      semantics: "Reference to a human-in-the-loop approval. Required (non-empty) at level A."
+    rollback_handle:
+      type: string
+      semantics: "Reference to a tested rollback operation restoring pre-action state. Required (non-empty) at level F."
+    declared_blast_radius_class:
+      type: string
+      enum: [pod, service, node, cluster, region, cross_region]
+      semantics: "Authorised blast-radius ceiling for this (agent, action-class). At F, blast_radius_class must be <= this."
+
+# AUTONOMY-INVARIANT CONTRACT (enforced by validate_trace.py):
+#   level O : an actuation is forbidden outright.
+#   level R : proposal_only must be true (no state-changing actuation).
+#   level A : approval_token must be present and non-empty.
+#   level F : blast_radius_class <= declared_blast_radius_class AND
+#             rollback_handle present and non-empty.
